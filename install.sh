@@ -1,8 +1,9 @@
 #!/bin/bash
 
-$DIR=$HOME/scripts
+DIR="$HOME/scripts"
+mkdir -p $DIR
 
-dpkg-query -l git >&- 2>&-
+dpkg-query -l git >/dev/null 2>/dev/null
 
 if [[ $? != 0 ]]; then
 	sudo apt-get install git;
@@ -12,9 +13,11 @@ mkdir -p $DIR
 
 git clone https://github.com/alagroy-42/ft_select.git $DIR/ft_select
 
+make -C ~/scripts/ft_select
+
 cp push.sh $DIR/push.sh	
 
-dpkg-query -l wget >&- 2>&-
+dpkg-query -l wget >/dev/null 2>/dev/null
 
 if [[ $? != 0 ]]; then
 	sudo apt-get install wget;
