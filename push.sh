@@ -8,7 +8,7 @@ files_to_fix=$(echo $files_to_add | tr ' ' '\n' | grep ".php")
 echo $files_to_fix | grep ".php" 1>/dev/null
 
 if [[ $? = 0 ]] && [[ $1 != '--no-fix' ]]; then
-	echo $files_to_fix | xargs -n1 ~/php-cs-fixer fix --allow-risky=yes 
+	echo $files_to_fix | xargs -n1 php-cs-fixer fix --allow-risky=yes 
 fi
 
 git add $files_to_add

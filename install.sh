@@ -27,6 +27,5 @@ wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.16.4/php-
 
 sudo chmod a+x $DIR/php-cs-fixer
 
-echo "alias php-cs-fixer='~/scripts/php-cs-fixer'" >> ~/.zshrc
-echo "alias php-cs-fixer='~/scripts/php-cs-fixer'" >> ~/.bashrc
-echo "alias push='~/scripts/push.sh'" >> ~/.zshrc
+SHELL_FILE=~/.`echo $SHELL | rev | cut -d'/' -f1 | rev`rc
+echo "export PATH=\$PATH:"$DIR >> $SHELL_FILE
