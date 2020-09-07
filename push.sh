@@ -2,7 +2,11 @@
 
 files=$(git status -s | rev | cut -d' ' -f1 | rev)
 
-files_to_add=$(~/scripts/ft_select/ft_select $files)
+files_to_add=$(`dirname $0`/ft_select/ft_select $files)
+
+if [[ $files_to_add == "" ]]; then
+	exit
+fi
 
 files_to_fix=$(echo $files_to_add | tr ' ' '\n' | grep ".php")
 echo $files_to_fix | grep ".php" 1>/dev/null
