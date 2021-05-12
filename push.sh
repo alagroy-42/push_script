@@ -8,13 +8,6 @@ if [[ $files_to_add == "" ]]; then
 	exit
 fi
 
-files_to_fix=$(echo $files_to_add | tr ' ' '\n' | grep ".php")
-echo $files_to_fix | grep ".php" 1>/dev/null
-
-if [[ $? = 0 ]] && [[ $1 != '--no-fix' ]]; then
-	echo $files_to_fix | xargs -n1 php-cs-fixer fix --allow-risky=yes 
-fi
-
 git add $files_to_add
 
 read -p "Commit message: " message
@@ -24,3 +17,10 @@ git commit -m "$message"
 branch=$(git branch | grep '\*' | tr -d '*')
 
 git push origin $branch
+
+git remote | grep upstream
+if [ $? ]; then
+	exit ;
+fi
+
+git push upstream $branch
